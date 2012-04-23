@@ -75,7 +75,7 @@ startingBoard   =  Board $ allOB VCT.// (spaces ++ diskes)
     centers = center : map (neighbor center) [left, upperLeft, up]
     center  = toIndex (sizeX `div` 2, sizeY `div` 2)
 
-----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 refer           :: Board -> Position -> Area
 refer b         =  (b @@) . toIndex
 (@@)            :: Board -> Index -> Area

@@ -6,8 +6,7 @@ import Board    ( Area(..), Position, reversal, fillBoard, flappableAreas
                 , putableAreas, countBW, nextTrunColor)
 import State    (GameState, Input(Input), assign, readComponent)
 import qualified Com.A              as A
-
-import qualified GameTree   as G
+import qualified Com.B              as B
 
 import Control.Monad ((>=>))
 
@@ -30,10 +29,6 @@ putDisk gs  = do
         renewBoardState ps b     = assign gs newBoard >> assign gs newColor
           where newBoard    = fillBoard (p:ps) nextColor b
                 newColor    = nextTrunColor newBoard nextColor
---                 | isPutable (reversal nextColor)   = reversal nextColor
---                 | isPutable nextColor              = nextColor
---                 | otherwise                        = Space
---                  where isPutable color = putableAreas color newBoard /= []
     deleteInput = assign gs (Input Nothing)
 
 type DecisionMaker  = GameState -> IO (Maybe Position)
@@ -60,7 +55,7 @@ comTest :: DecisionMaker
 comTest gs  = do
     curtBoard   <- readComponent gs
     nextColor   <- readComponent gs
-    return $ Just $ G.decisionMaking nextColor curtBoard
+    return $ Just $ B.decisionMaking nextColor curtBoard
 
 gameEnd     :: DecisionMaker
 gameEnd gs  =  return Nothing

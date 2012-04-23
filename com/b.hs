@@ -1,5 +1,6 @@
-module GameTree
-where
+module Com.B
+( decisionMaking
+) where
 
 import Data.Tree (Tree(Node))
 import Board
